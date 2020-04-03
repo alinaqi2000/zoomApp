@@ -1,4 +1,5 @@
 <?php
+error_reporting(1);
 $result = '';
 if (isset($_POST['dmas_btn'])) {
     $val1 = $_POST['value1'];
@@ -26,6 +27,7 @@ if (isset($_POST['temp_btn'])) {
 
 <head>
     <title>My Zoom App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/bootstrap.min.css">
     <link rel="stylesheet" href="assets/my_styles.css">
     <script src="assets/jquery.min.js"></script>
@@ -41,12 +43,16 @@ if (isset($_POST['temp_btn'])) {
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.php">Home</a>
+                    <li class="nav-item ">
+                        <a class="nav-link <?= $_REQUEST['cal'] == '' ? 'active' : ''; ?>" href="index.php">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Link</a>
+                    <li class="nav-item ">
+                        <a class="nav-link <?= $_REQUEST['cal'] == 'dmas' ? 'active' : ''; ?>" href="index.php?cal=dmas">Dmas</a>
                     </li>
+                    <li class="nav-item ">
+                        <a class="nav-link  <?= $_REQUEST['cal'] == 'temp' ? 'active' : ''; ?>" href="index.php?cal=temp">Temperature</a>
+                    </li>
+
                     <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown
@@ -72,19 +78,18 @@ if (isset($_POST['temp_btn'])) {
     <main class="content">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 py-3 bg-light shadow">
+                <div class="col-md-3 col-xs-12 py-3 bg-light shadow">
                     <h3>My SideBar</h3>
                     <div class="row">
                         <div class="col-12">
                             <div class="list-group" id="list-tab" role="tablist">
-                                <a class="list-group-item list-group-item-action active" id="list-dmas-list" data-toggle="list" href="#list-dmas" role="tab" aria-controls="dmas">Dmas Calculator</a>
-                                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Temperature Calculator</a>
+                                <a class="list-group-item list-group-item-action <?= $_REQUEST['cal'] == 'dmas' ? 'active' : ''; ?>" href="index.php?cal=dmas">Dmas Calculator</a>
+                                <a class="list-group-item list-group-item-action <?= $_REQUEST['cal'] == 'temp' ? 'active' : ''; ?>" href="index.php?cal=temp">Temperature Calculator</a>
                             </div>
                         </div>
-
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-9 col-xs-12">
                     <div class="col-12">
                         <div class="col-md-12 my-3">
                             <div class="row">
@@ -96,42 +101,19 @@ if (isset($_POST['temp_btn'])) {
                         </div>
 
                         <div class="tab-content" id="nav-tabContent">
+                            <?php
+                            $method = $_REQUEST['cal'];
+                            if ($method == 'dmas') {
+                                include_once('dmas.php');
+                            } elseif ($method == 'temp') {
+                                include_once('temp.php');
+                            } else {
+                            ?>
+                                <h2>Welcome to Home</h2>
+                            <?php
+                            }
+                            ?>
 
-                            <div class="tab-pane fade show active" id="list-dmas" role="tabpanel" aria-labelledby="list-dmas-list">
-                                <h2>Dmas Calculator</h2>
-                                <form class="col-6" method="post" action="index.php">
-                                    <div class="form-group">
-                                        <label for="Value1">First Value</label>
-                                        <input type="text" name="value1" class="form-control" id="Value1">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Value2">Second Value</label>
-                                        <input type="text" name="value2" class="form-control" id="Value2">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" name="dmas_btn" value="Dmas Button" class="btn btn-success">
-                                    </div>
-                                </form>
-
-                            </div>
-                            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-
-                                <h2>Temperature Calculator</h2>
-                                <form class="col-6" method="post" action="index.php">
-                                    <div class="form-group">
-                                        <label for="Value1">First Value</label>
-                                        <input type="text" name="value1" class="form-control" id="Value1">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Value2">Second Value</label>
-                                        <input type="text" name="value2" class="form-control" id="Value2">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" name="temp_btn" value="Temp Button" class="btn btn-success">
-                                    </div>
-                                </form>
-
-                            </div>
 
                         </div>
                     </div>
@@ -139,7 +121,12 @@ if (isset($_POST['temp_btn'])) {
             </div>
         </div>
     </main>
+    <footer class="footer">
+        <div class="container">
+            <span>2020 &copy; zoomApp. All rights reserved.</span>
+        </div>
 
+    </footer>
     <script src="assets/bootstrap.min.js"></script>
 </body>
 
