@@ -1,18 +1,16 @@
-<div class="tab-pane fade active show" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-
-    <h2>Temperature Calculator</h2>
+    <h4>Temperature Calculator</h4>
     <form class="col-md-6 col-xs-12" method="post">
         <div class="form-group">
-            <label for="Value1">First Value</label>
-            <input type="text" name="value1" class="form-control" id="Value1">
+            <input type="text" placeholder="Enter Value Here" class="form-control" name="value">
         </div>
         <div class="form-group">
-            <label for="Value2">Second Value</label>
-            <input type="text" name="value2" class="form-control" id="Value2">
+            <select name="type" class="form-control">
+                <option value="0" disabled selected>Select Type</option>
+                <option value="f2c">Fahrenheit To Celcius</option>
+                <option value="c2f">Celcius To Fahrenheit</option>
+            </select>
         </div>
         <div class="form-group">
-            <input type="submit" name="temp_btn" value="Temp Button" class="btn btn-success">
+            <button name="tempBtn" type="submit" class="btn w-100 btn-warning">Calculate Temperature</button>
         </div>
     </form>
-
-</div>
