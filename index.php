@@ -1,29 +1,5 @@
 <?php
 error_reporting(1);
-$result = '';
-if (isset($_POST['dmas_btn'])) {
-    $val1 = $_POST['value1'];
-    $val2 = $_POST['value2'];
-    if ($val1 == '' || $val2 == '') {
-        $result = "<span class='alert w-100 alert-danger'> <strong>Error: </strong>Please enter all values</span>";
-    } else {
-        $sum = $val1 + $val2;
-        $result = "<span class='alert w-100 alert-success'>Sum is <strong>" . $sum . "</strong></span>";
-    }
-}
-if (isset($_POST['tempBtn'])) {
-    $val = $_POST['value'];
-    $type = $_POST['type'];
-    if ($type == 'f2c') {
-        $ans = ($val - 32) * 5 / 9;
-        $result = "<span class='alert w-100 alert-primary'>Answer : <strong>" . $ans . "°C</strong></span>";
-    } elseif ($type == 'c2f') {
-        $ans = ($val * (9 / 5)) + 32;
-        $result = "<span class='alert w-100 alert-secondary'>Answer : <strong>" . $ans . "F</strong></span>";
-    } else {
-        $result = "<span class='alert w-100 alert-danger'><strong>Error: </strong>Please specify correct type.</span>";
-    }
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,13 +23,13 @@ if (isset($_POST['tempBtn'])) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link <?= $_REQUEST['cal'] == '' ? 'active' : ''; ?>" href="index.php">Home</a>
+                        <a class="nav-link <?= $_REQUEST['page'] == '' ? 'active' : ''; ?>" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $_REQUEST['cal'] == 'dmas' ? 'active' : ''; ?>" href="index.php?cal=dmas">Dmas</a>
+                        <a class="nav-link <?= $_REQUEST['page'] == 'calculators' ? 'active' : ''; ?>" href="index.php?page=calculators">Calculators</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link  <?= $_REQUEST['cal'] == 'temp' ? 'active' : ''; ?>" href="index.php?cal=temp">Temperature</a>
+                        <a class="nav-link  <?= $_REQUEST['page'] == 'user_entry' ? 'active' : ''; ?>" href="index.php?page=user_entry">User Entry</a>
                     </li>
                 </ul>
 
@@ -63,49 +39,18 @@ if (isset($_POST['tempBtn'])) {
     <main class="content">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-xs-12 py-3 bg-light shadow">
-                    <h3>My SideBar</h3>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="list-group list-group-flush">
-                                <a class="list-group-item <?= $_REQUEST['cal'] == 'dmas' ? 'font-weight-bold' : ''; ?>" href="index.php?cal=dmas">Dmas Calculator</a>
-                                <a class="list-group-item <?= $_REQUEST['cal'] == 'temp' ? 'font-weight-bold' : ''; ?>" href="index.php?cal=temp">Temperature Calculator</a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-9 col-xs-12">
-                    <div class="col-12">
-                        <div class="col-md-6 my-3">
-                            <div class="row">
-                                <?php
-                                echo $result
-                                ?>
-                            </div>
-
-                        </div>
-
-                        <div class="tab-content" id="nav-tabContent">
-
-
-                            <?php
-                            $method = $_REQUEST['cal'];
-                            if ($method == 'dmas') {
-                                include_once('dmas.php');
-                            } elseif ($method == 'temp') {
-                                include_once('temp.php');
-                            } else {
-                            ?>
-                                <h2>Welcome to Home</h2>
-                            <?php
-                            }
-                            ?>
-
-
-                        </div>
-                    </div>
-                </div>
+                <?php
+                $page = $_REQUEST['page'];
+                if ($page == 'calculators') {
+                    include('pages/calculators.php');
+                } elseif ($page == 'user_entry') {
+                    include('pages/users_entry.php');
+                } else {
+                ?>
+                    <h1>Welcome To Home</h1>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </main>
