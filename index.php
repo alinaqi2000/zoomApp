@@ -1,5 +1,19 @@
 <?php
 error_reporting(1);
+session_start();
+// print_r($_SESSION);
+$page = $_REQUEST['page'];
+if ($page == 'login') {
+    include('codes/login.php');
+} else {
+    if (!isset($_SESSION['site_id']) && $_SESSION['site_id'] != '1') {
+        header('Location: http://localhost/zoomApp/index.php?page=login');
+        die();
+    }
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,53 +27,37 @@ error_reporting(1);
 </head>
 
 <body>
-    <header class="mb-3 shadow">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="index.php"><img src="assets/new_logo.png" height="60px" width="150px" alt="Logo"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <?php
+    if ($page != 'login') {
+        include('pages/shared/header.php');
+    }
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link <?= $_REQUEST['page'] == '' ? 'active' : ''; ?>" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?= $_REQUEST['page'] == 'calculators' ? 'active' : ''; ?>" href="index.php?page=calculators">Calculators</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link  <?= $_REQUEST['page'] == 'user_entry' ? 'active' : ''; ?>" href="index.php?page=user_entry">User Entry</a>
-                    </li>
-                </ul>
-
-            </div>
-        </nav>
-    </header>
+    ?>
     <main class="content">
         <div class="container">
             <div class="row">
                 <?php
-                $page = $_REQUEST['page'];
-                if ($page == 'calculators') {
-                    include('pages/calculators.php');
-                } elseif ($page == 'user_entry') {
-                    include('pages/users_entry.php');
-                } else {
+
+                if (!empty($page)) {
+                    if (include('pages/' . $page . '.php')) {
+                        echo '';
+                    } else {
                 ?>
-                    <h1>Welcome To Home</h1>
+                        <h4>404 Page not found</h4>
                 <?php
+                    }
+                } else {
+                    include('pages/home.php');
                 }
                 ?>
             </div>
         </div>
     </main>
-    <footer class="footer">
-        <div class="container">
-            <span>2020 &copy; zoomApp. All rights reserved.</span>
-        </div>
-
-    </footer>
+    <?php
+    if ($page != 'login') {
+        include('pages/shared/footer.php');
+    }
+    ?>
     <script src="assets/bootstrap.min.js"></script>
 </body>
 

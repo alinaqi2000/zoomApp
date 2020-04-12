@@ -41,7 +41,7 @@ if (isset($_POST['tempBtn'])) {
         <div class="col-md-6 my-3">
             <div class="row">
                 <?php
-                echo $result
+                echo $result;
                 ?>
             </div>
 
