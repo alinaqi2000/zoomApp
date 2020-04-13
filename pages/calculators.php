@@ -4,10 +4,10 @@ if (isset($_POST['dmas_btn'])) {
     $val1 = $_POST['value1'];
     $val2 = $_POST['value2'];
     if ($val1 == '' || $val2 == '') {
-        $result = "<span class='alert w-100 alert-danger'> <strong>Error: </strong>Please enter all values</span>";
+        $result = "<p class='alert w-100 alert-danger'> <strong>Error: </strong>Please enter all values</p>";
     } else {
         $sum = $val1 + $val2;
-        $result = "<span class='alert w-100 alert-success'>Sum is <strong>" . $sum . "</strong></span>";
+        $result = "<p class='alert w-100 alert-success'>Sum is <strong>" . $sum . "</strong></p>";
     }
 }
 if (isset($_POST['tempBtn'])) {
@@ -15,12 +15,12 @@ if (isset($_POST['tempBtn'])) {
     $type = $_POST['type'];
     if ($type == 'f2c') {
         $ans = ($val - 32) * 5 / 9;
-        $result = "<span class='alert w-100 alert-primary'>Answer : <strong>" . $ans . "°C</strong></span>";
+        $result = "<p class='alert w-100 alert-primary'>Answer : <strong>" . $ans . "°C</strong></p>";
     } elseif ($type == 'c2f') {
         $ans = ($val * (9 / 5)) + 32;
-        $result = "<span class='alert w-100 alert-secondary'>Answer : <strong>" . $ans . "F</strong></span>";
+        $result = "<p class='alert w-100 alert-secondary'>Answer : <strong>" . $ans . "F</strong></p>";
     } else {
-        $result = "<span class='alert w-100 alert-danger'><strong>Error: </strong>Please specify correct type.</span>";
+        $result = "<p class='alert w-100 alert-danger'><strong>Error: </strong>Please specify correct type.</p>";
     }
 }
 ?>
