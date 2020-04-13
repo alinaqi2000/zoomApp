@@ -44,8 +44,8 @@ if (isset($_POST['usr_entry'])) {
 
         ?>
             <div class="col-md-8">
-                <div class="row" style="overflow-x: scroll">
-                    <table class="table table-hover">
+                <div class="row overflow-auto">
+                    <table class="table table-hover <?= $themeMode == 'light' ? '' : 'table-dark'; ?>">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -64,7 +64,7 @@ if (isset($_POST['usr_entry'])) {
                         </tbody>
                     </table>
                     <div class="form-group">
-                        <a href="index.php?page=user_entry" class="btn btn-secondary">Enter New User</a>
+                        <a href="<?= $path ?>index.php?page=users_entry" class="btn <?= $themeMode == 'light' ? 'btn-secondary' : 'btn-outline-secondary'; ?>">Enter New User</a>
                     </div>
 
                 </div>
@@ -96,14 +96,14 @@ if (isset($_POST['usr_entry'])) {
                             </select>
                         </div>
                         <div class="form-group">
-                            <input type="submit" class="btn btn-primary w-100" name="usr_entry" value="Enter User">
+                            <input type="submit" class="btn <?= $themeMode == 'light' ? 'btn-info' : 'btn-outline-info'; ?> w-100" name="usr_entry" value="Enter User">
                         </div>
                     </form>
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="row" style="overflow-x: scroll">
-                    <table class="table table-striped table-hover">
+                <div class="row overflow-auto">
+                    <table class="table table-striped table-hover <?= $themeMode == 'light' ? '' : 'table-dark'; ?>">
                         <thead>
                             <tr>
                                 <th>Name</th>

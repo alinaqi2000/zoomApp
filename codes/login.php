@@ -27,7 +27,7 @@ if (isset($_POST['login_btn'])) {
     $_SESSION['signal'] = $signal;
     $_SESSION['msg'] = $msg;
     if ($_SESSION['signal'] == 'ok') {
-        header('Location: http://localhost/zoomApp/index.php');
+        header('Location: ' . $path);
         die();
     }
 }

@@ -2,7 +2,14 @@
 if (isset($_SESSION['signal'])) {
     if ($_SESSION['signal'] == 'ok') {
 ?>
-        <p class="alert w-100 alert-success"><?php echo $_SESSION['msg'] ?></p>
+
+        <div class="col-md-12">
+            <div class="row">
+                <p class="alert float-left alert-success"><?php echo $_SESSION['msg'] ?></p>
+            </div>
+        </div>
+
+
 <?php
     }
     unset($_SESSION["signal"]);

@@ -35,3 +35,26 @@ a:hover {
 .box .box-header {
     text-align: center;
 }
+
+.bg-dark h1, .bg-dark p, .bg-dark h3, .bg-dark span, .bg-dark label, .bg-dark th, .bg-dark td, .bg-dark.list-group-item, .bg-dark h4, .bg-dark h2, .bg-dark input {
+    color: #fff !important;
+}
+
+.bg-dark input[type="text"], .bg-dark input[type="number"], .bg-dark select, .bg-dark textarea {
+    background-color: #454d55;
+    color: #f5f5f5;
+    /* border-color: #000; */
+}
+
+.bg-dark p.alert {
+    color: inherit !important;
+}
+
+button.nav-link {
+    background-color: transparent;
+    border: none;
+}
+
+button.nav-link:focus {
+    outline: none;
+}

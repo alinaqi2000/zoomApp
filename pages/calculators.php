@@ -24,13 +24,13 @@ if (isset($_POST['tempBtn'])) {
     }
 }
 ?>
-<div class="col-md-3 col-xs-12 py-3 bg-light shadow">
+<div class="col-md-3 col-xs-12 py-3 bg-light shadow <?= $themeMode == 'light' ? '' : 'bg-dark'; ?>">
     <h3>My SideBar</h3>
     <div class="row">
         <div class="col-12">
-            <div class="list-group list-group-flush">
-                <a class="list-group-item <?= $_REQUEST['cal'] == 'dmas' ? 'font-weight-bold' : ''; ?>" href="index.php?page=calculators&cal=dmas">Dmas Calculator</a>
-                <a class="list-group-item <?= $_REQUEST['cal'] == 'temp' ? 'font-weight-bold' : ''; ?>" href="index.php?page=calculators&cal=temp">Temperature Calculator</a>
+            <div class="list-group list-group-flush ">
+                <a class="list-group-item <?= $themeMode == 'light' ? '' : 'bg-dark'; ?> <?= $_REQUEST['cal'] == 'dmas' ? 'font-weight-bold' : ''; ?>" href="index.php?page=calculators&cal=dmas">Dmas Calculator</a>
+                <a class="list-group-item <?= $themeMode == 'light' ? '' : 'bg-dark'; ?> <?= $_REQUEST['cal'] == 'temp' ? 'font-weight-bold' : ''; ?>" href="index.php?page=calculators&cal=temp">Temperature Calculator</a>
             </div>
 
         </div>

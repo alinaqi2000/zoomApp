@@ -11,6 +11,6 @@
             </select>
         </div>
         <div class="form-group">
-            <button name="tempBtn" type="submit" class="btn w-100 btn-warning">Calculate Temperature</button>
+            <button name="tempBtn" type="submit" class="btn w-100 <?= $themeMode == 'light' ? 'btn-warning' : 'btn-outline-warning'; ?>">Calculate Temperature</button>
         </div>
     </form>

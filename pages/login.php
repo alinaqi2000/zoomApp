@@ -27,7 +27,7 @@
                             <input type="password" name="password" autocomplete="off" id="password" class="form-control">
                         </div>
                         <div class="form-group">
-                            <input type="submit" name="login_btn" value="Signin" class="btn w-100 btn-info">
+                            <input type="submit" name="login_btn" value="Signin" class="btn w-100 <?= $themeMode == 'light' ? 'btn-info' : 'btn-outline-info'; ?>">
                         </div>
                     </form>
                 </div>
