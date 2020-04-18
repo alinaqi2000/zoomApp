@@ -1,33 +1,41 @@
 <?php
 $mode = '';
-$users = array();
-$users = array(
-    array(
+$users = [];
+$users = [
+    [
         "name" => "Ali Naqi",
         "cnic" => 124234324,
         "gender" => 'male',
-        "degree" => 'graduation'
-    ),
-    array(
+        "degree" => 'graduation',
+        "exp" => '2 yrs'
+    ],
+    [
         "name" => "Ashraf",
         "cnic" => 234234324,
         "gender" => 'male',
         "degree" => 'intermediate'
-    ),
-    array(
+    ],
+    [
         "name" => "Haseeb",
         "cnic" => 234234324324,
         "gender" => 'male',
-        "degree" => 'graduation'
-    ),
-    array(
+        "degree" => 'graduation',
+        "exp" => '2 yrs'
+    ],
+    [
         "name" => "Izmah",
         "cnic" => 53224325532,
         "gender" => 'female',
         "degree" => 'intermediate'
-    )
+    ],
+    [
+        "name" => "Saad Khan",
+        "cnic" => 1311544,
+        "gender" => 'male',
+        "degree" => 'intermediate'
+    ]
 
-);
+];
 if (isset($_POST['usr_entry'])) {
     $mode = 'view';
     $name = $_POST['name'];
@@ -76,7 +84,10 @@ if (isset($_POST['usr_entry'])) {
                 <div class="row">
                     <form class="col-md-4" method="post">
                         <div class="form-group">
-                            <input type="text" name="name" placeholder="Enter name" class="form-control">
+                            <input type="text" name="name" id="usrName" placeholder="Enter name" class="form-control">
+                        </div>
+                        <div class="row" id="msgBox">
+                            <p id="msg"></p>
                         </div>
                         <div class="form-group">
                             <input type="number" name="cnic" placeholder="Enter cnic" class="form-control">
@@ -110,20 +121,32 @@ if (isset($_POST['usr_entry'])) {
                                 <th>CNIC</th>
                                 <th>Gender</th>
                                 <th>Degree</th>
+                                <th>Experience</th>
                             </tr>
                         </thead>
                         <tbody>
+
+
+                            <pre class="text-white">
+<?php
+            print_r($users);
+?>
+                            </pre>
                             <?php
                             foreach ($users as $user) {
+                                // $total = count($users);
+                                // for ($i = 0; $i < $total; $i++) {
                             ?>
                                 <tr>
                                     <td><?= $user['name'] ?></td>
                                     <td><?= $user['cnic'] ?></td>
                                     <td class="<?= $user['gender'] == 'male' ? 'text-success' : 'text-danger'; ?>"><?= $user['gender'] == 'male' ? 'Male' : 'Female'; ?></td>
                                     <td><?= $user['degree'] ?></td>
+                                    <td><?= $user['exp'] ?></td>
                                 </tr>
                             <?php
                             }
+
                             ?>
                         </tbody>
                     </table>
@@ -136,3 +159,27 @@ if (isset($_POST['usr_entry'])) {
         ?>
     </div>
 </div>
+<script>
+    $(document.body).ready(function() {
+        // $('#usrName').val('Ali Naqi');
+        var t = $('#usrName');
+        $('#msgBox').hide();
+        t.on("change", function() {
+
+            $('#msgBox').show();
+            if (t.val() != '') {
+                t.addClass('valid');
+                t.removeClass('in-valid');
+                $('#msg').addClass('text-success');
+                $('#msg').html('Value added');
+            } else {
+                t.addClass('in-valid');
+                t.removeClass('valid');
+                $('#msg').addClass('text-danger');
+                $('#msg').html('Please add any name.');
+            }
+
+        })
+
+    });
+</script>
