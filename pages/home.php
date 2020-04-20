@@ -17,5 +17,8 @@ if (isset($_SESSION['signal'])) {
 }
 unset($_SESSION["signal"]);
 unset($_SESSION["msg"]);
+$message = "Welcome To Home";
 ?>
-<h1>Welcome To Home</h1>
+<h1><?php
+    echo subString($message);
+    ?></h1>
