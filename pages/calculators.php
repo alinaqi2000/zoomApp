@@ -1,4 +1,5 @@
 <?php
+
 $result = '';
 if (isset($_POST['dmas_btn'])) {
     $val1 = $_POST['value1'];
@@ -6,7 +7,7 @@ if (isset($_POST['dmas_btn'])) {
     if ($val1 == '' || $val2 == '') {
         $result = "<p class='alert w-100 alert-danger'> <strong>Error: </strong>Please enter all values</p>";
     } else {
-        $sum = $val1 + $val2;
+        $sum = sum($val1, $val2);
         $result = "<p class='alert w-100 alert-success'>Sum is <strong>" . $sum . "</strong></p>";
     }
 }

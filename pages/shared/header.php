@@ -14,6 +14,9 @@
                     <a class="nav-link <?= $_REQUEST['page'] == 'calculators' ? 'active' : ''; ?>" href="<?= $path ?>index.php?page=calculators">Calculators</a>
                 </li>
                 <li class="nav-item ">
+                    <a class="nav-link  <?= $_REQUEST['page'] == 'posts' ? 'active' : ''; ?>" href="<?= $path ?>index.php?page=posts">Posts</a>
+                </li>
+                <li class="nav-item ">
                     <a class="nav-link  <?= $_REQUEST['page'] == 'users_entry' ? 'active' : ''; ?>" href="<?= $path ?>index.php?page=users_entry">User Entry</a>
                 </li>
             </ul>
