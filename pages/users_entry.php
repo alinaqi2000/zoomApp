@@ -1,6 +1,10 @@
 <?php
 $mode = '';
 $users = [];
+$stu = ["Ali", "Ashraf", "Izmah"];
+// echo '<pre>';
+// print_r($stu);
+// echo $stu[1];
 $users = [
     [
         "name" => "Ali Naqi",
@@ -119,35 +123,31 @@ if (isset($_POST['usr_entry'])) {
                             <tr>
                                 <th>Name</th>
                                 <th>CNIC</th>
-                                <th>Gender</th>
-                                <th>Degree</th>
-                                <th>Experience</th>
+                                <!-- <th>Gender</th> -->
+                                <th>Class</th>
+                                <th>Registration No.</th>
                             </tr>
                         </thead>
                         <tbody>
 
 
-                            <pre class="text-white">
-<?php
-            print_r($users);
-?>
-                            </pre>
+
                             <?php
-                            foreach ($users as $user) {
-                                // $total = count($users);
-                                // for ($i = 0; $i < $total; $i++) {
+                            $connection = mysqli_connect('localhost', 'root', '', 'zoomapp_db');
+                            $exe = $connection->query("SELECT * FROM tbl_students");
+                            while ($user = $exe->fetch_array()) {
                             ?>
                                 <tr>
-                                    <td><?= $user['name'] ?></td>
-                                    <td><?= $user['cnic'] ?></td>
-                                    <td class="<?= $user['gender'] == 'male' ? 'text-success' : 'text-danger'; ?>"><?= $user['gender'] == 'male' ? 'Male' : 'Female'; ?></td>
-                                    <td><?= $user['degree'] ?></td>
-                                    <td><?= $user['exp'] ?></td>
+                                    <td><?= $user['student_name'] ?></td>
+                                    <td><?= $user['student_cnic'] ?></td>
+                                    <!-- <td class="<?= $user['gender'] == 'male' ? 'text-success' : 'text-danger'; ?>"><?= $user['gender'] == 'male' ? 'Male' : 'Female'; ?></td> -->
+                                    <td><?= $user['student_class'] ?></td>
+                                    <td><?= $user['student_reg'] ?></td>
                                 </tr>
                             <?php
                             }
-
                             ?>
+
                         </tbody>
                     </table>
 

@@ -23,12 +23,17 @@
             <ul class="navbar-nav float-right">
                 <li class="nav-item">
                     <form action="" method="post">
-                        <button class="nav-link active" name="theme_btn" type=submit><?= $themeMode == 'light' ? 'Dark Mode' : 'Light Mode'; ?></button>
+                        <button class="nav-link active" name="theme_btn" type="submit">
+                            <?php if ($themeMode == 'light') {
+                                echo 'Dark Mode';
+                            } else {
+                                echo 'Light Mode';
+                            } ?></button>
                     </form>
                 </li>
                 <li class="nav-item">
                     <?php
-                    if ($_SESSION['site_login'] == '1') {
+                    if ($_SESSION['site_id'] == '1') {
                     ?>
                         <a class="nav-link active" href="<?= $path ?>index.php?page=logout">Sign Out</a>
                     <?php

@@ -2,12 +2,15 @@
 error_reporting(1);
 session_start();
 $path = "http://localhost/zoomApp/";
+// Site Theme Mode
+
 $themeMode = 'light';
 if (!isset($_SESSION['theme'])) {
     $_SESSION['theme'] = $themeMode;
 } else {
     $themeMode = $_SESSION['theme'];
 }
+// 
 $page = $_REQUEST['page'];
 if ($page == 'login') {
     include('codes/login.php');

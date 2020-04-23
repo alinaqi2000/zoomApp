@@ -13,7 +13,9 @@ include('includes/init.php');
 </head>
 
 <body class="<?= $themeMode == 'light' ? '' : 'bg-dark'; ?>">
+
     <?php
+  
     if ($page != 'login') {
         include('pages/shared/header.php');
     }
