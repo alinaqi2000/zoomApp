@@ -101,7 +101,7 @@ if ($_REQUEST['mode'] == 'delete') {
         <div class="row my-2">
             <a href="<?= $path ?>index.php?page=posts&mode=add" class="btn <?= $themeMode == 'light' ? 'btn-success' : 'btn-outline-success'; ?>">Add new</a>
         </div>
-        <div class="row">
+        <div class="row overflow-auto">
             <table class="table table-striped table-hover <?= $themeMode == 'light' ? '' : 'table-dark'; ?>">
                 <thead>
                     <tr>
