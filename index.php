@@ -15,8 +15,8 @@ include('includes/init.php');
 <body class="<?= $themeMode == 'light' ? '' : 'bg-dark'; ?>">
 
     <?php
-  
-    if ($page != 'login') {
+
+    if ($page != 'authentication') {
         include('pages/shared/header.php');
     }
 
@@ -33,7 +33,7 @@ include('includes/init.php');
         </div>
     </main>
     <?php
-    if ($page != 'login') {
+    if ($page != 'authentication') {
         include('pages/shared/footer.php');
     }
     ?>

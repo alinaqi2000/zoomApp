@@ -40,6 +40,10 @@ a:hover {
     color: #fff !important;
 }
 
+.bg-dark hr {
+    background-color: rgba(255, 255, 255, .6) !important;
+}
+
 .bg-dark input[type="text"], .bg-dark input[type="number"], .bg-dark select, .bg-dark textarea {
     background-color: #454d55;
     color: #f5f5f5;

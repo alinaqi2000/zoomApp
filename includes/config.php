@@ -1,6 +1,5 @@
 <?php
-error_reporting(1);
-session_start();
+
 $path = "http://localhost/zoomApp/";
 // Site Theme Mode
 
@@ -12,11 +11,11 @@ if (!isset($_SESSION['theme'])) {
 }
 // 
 $page = $_REQUEST['page'];
-if ($page == 'login') {
-    include('codes/login.php');
+if ($page == 'authentication') {
+    include('codes/authentication.php');
 } else {
     if (!isset($_SESSION['site_id']) && $_SESSION['site_id'] != '1') {
-        header('Location: ' . $path . 'index.php?page=login');
+        header('Location: ' . $path . 'index.php?page=authentication');
         die();
     }
 }
