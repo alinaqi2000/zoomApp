@@ -18,11 +18,11 @@ CREATE TABLE `tbl_posts` (
 --
 
 INSERT INTO `tbl_posts` (`post_id`, `post_title`, `post_detail`, `post_date`, `post_image`) VALUES
-(1, 'My First Post', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2020-04-22 12:12:03', ''),
-(2, 'My Second Post', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2020-04-22 12:12:03', ''),
-(3, 'My Third Post', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2020-04-22 12:12:21', ''),
-(4, 'My Fourth Post', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2020-04-22 12:12:28', ''),
-(6, 'My 5th post.', 'Lorem Ipsum.', '2020-04-24 12:28:39', '');
+(1, 'My First Post', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2020-04-22 07:12:03', ''),
+(2, 'My Second Post', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2020-04-22 07:12:03', ''),
+(3, 'My Third Post', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2020-04-22 07:12:21', ''),
+(4, 'My Fourth Post', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2020-04-22 07:12:28', ''),
+(6, 'My 5th post.', 'Lorem Ipsum.', '2020-04-24 07:28:39', '');
 
 -- --------------------------------------------------------
 
@@ -46,8 +46,30 @@ CREATE TABLE `tbl_students` (
 --
 
 INSERT INTO `tbl_students` (`student_id`, `student_name`, `student_class`, `student_date`, `student_reg`, `student_cnic`, `student_detail`) VALUES
-(1, 'Ali Naqi', 'BSSE-2', '2020-04-23 12:56:07', 'BSSE07193048', 1351351355, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'),
-(2, 'Chaudhary Ashraf', 'BSSE', '2020-04-23 12:46:10', 'BSSE07193034', 1351351356, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
+(1, 'Ali Naqi', 'BSSE-2', '2020-04-23 07:56:07', 'BSSE07193048', 1351351355, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'),
+(2, 'Chaudhary Ashraf', 'BSSE', '2020-04-23 07:46:10', 'BSSE07193034', 1351351356, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_users`
+--
+
+DROP TABLE IF EXISTS `tbl_users`;
+CREATE TABLE `tbl_users` (
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `user_pass` varchar(255) NOT NULL,
+  `user_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_users`
+--
+
+INSERT INTO `tbl_users` (`user_id`, `user_name`, `user_pass`, `user_date`) VALUES
+(6, 'admin', '21232f297a57a5a743894a0e4a801fc3', '2020-04-25 17:33:00'),
+(7, 'alinaqi2000', '21232f297a57a5a743894a0e4a801fc3', '2020-04-25 17:33:41');
 
 --
 -- Indexes for dumped tables
@@ -66,6 +88,12 @@ ALTER TABLE `tbl_students`
   ADD PRIMARY KEY (`student_id`);
 
 --
+-- Indexes for table `tbl_users`
+--
+ALTER TABLE `tbl_users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -73,11 +101,17 @@ ALTER TABLE `tbl_students`
 -- AUTO_INCREMENT for table `tbl_posts`
 --
 ALTER TABLE `tbl_posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_students`
 --
 ALTER TABLE `tbl_students`
   MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbl_users`
+--
+ALTER TABLE `tbl_users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
