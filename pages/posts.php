@@ -1,12 +1,15 @@
 <?php
 if (isset($_POST['save_post'])) {
     // echo $_FILES['image']["tmp_name"];
+    // print_r($_POST['detail']);
+    // print_r($_FILES['image']['name']);
     // die();
     $title = mysqli_real_escape_string($conn, $_POST['title']);
     $detail = mysqli_real_escape_string($conn, $_POST['detail']);
     $image = $_FILES["image"]["name"];
-    if ($title != "" && $detail != "") {
-        if ($_REQUEST['mode'] == 'add') {
+
+    if ($_REQUEST['mode'] == 'add') {
+        if ($title != "" && $detail != "" && $image != "") {
 
             $i = strrpos($_FILES['image']["name"], ".");
             $l = strlen($_FILES['image']["name"]) - $i;
@@ -27,13 +30,18 @@ if (isset($_POST['save_post'])) {
                     }
                 } else {
                     $signal = "bad";
-                    $msg = "Please no uploaded, please try again.";
+                    $msg = "Image not uploaded, please try again.";
                 }
             } else {
                 $signal = "bad";
                 $msg = "Please select valid image format.";
             }
-        } elseif ($_REQUEST['mode'] == 'edit') {
+        } else {
+            $signal = "bad";
+            $msg = "Please fill in all the required fields.";
+        }
+    } elseif ($_REQUEST['mode'] == 'edit') {
+        if ($title != "" && $detail != "") {
             if ($_FILES['image']["name"]) {
                 $i = strrpos($_FILES['image']["name"], ".");
                 $l = strlen($_FILES['image']["name"]) - $i;
@@ -53,7 +61,7 @@ if (isset($_POST['save_post'])) {
                         }
                     } else {
                         $signal = "bad";
-                        $msg = "Please no uploaded, please try again.";
+                        $msg = "Image not uploaded, please try again.";
                     }
                 } else {
                     $signal = "bad";
@@ -69,15 +77,21 @@ if (isset($_POST['save_post'])) {
                     $msg = "Something went wrong.";
                 }
             }
+        } else {
+            $signal = "bad";
+            $msg = "Please fill in all the required fields.";
         }
-    } else {
-        $signal = "bad";
-        $msg = "Please fill in all the required fields.";
     }
+
     $_SESSION['signal'] = $signal;
     $_SESSION['msg'] = $msg;
 }
 if ($_REQUEST['mode'] == 'delete') {
+    $query2 = "SELECT * FROM tbl_posts WHERE post_id='" . $_REQUEST['id'] . "'";
+    $exe = $conn->query($query2);
+    while ($post =  $exe->fetch_array()) {
+        unlink('./uploads/' . $post['post_image']);
+    }
     $query = "DELETE FROM tbl_posts WHERE post_id='" . $_REQUEST['id'] . "'";
     if ($conn->query($query) == true) {
         $signal = "ok";
@@ -94,6 +108,25 @@ if ($_REQUEST['mode'] == 'delete') {
 
 ?>
 <div class="col-md-12">
+    <div class="row">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb <?= $themeMode == 'light' ? 'bg-white' : 'bg-dark'; ?>">
+                <li class="breadcrumb-item"><a href="<?= $path ?>">Home</a></li>
+                <?php
+                if (isset($_REQUEST['mode'])) {
+                ?>
+                    <li class="breadcrumb-item"><a href="<?= $path ?>index.php?page=posts">Manage Posts</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?= $_REQUEST['mode'] ?></li>
+                <?php
+                } else {
+                ?>
+                    <li class="breadcrumb-item active" aria-current="page">Manage Posts</li>
+                <?php
+                }
+                ?>
+            </ol>
+        </nav>
+    </div>
     <div class="row my-3">
         <h4>Manage Posts</h4>
     </div>
@@ -162,7 +195,18 @@ if ($_REQUEST['mode'] == 'delete') {
     } else {
     ?>
         <div class="row my-2">
-            <a href="<?= $path ?>index.php?page=posts&mode=add" class="btn <?= $themeMode == 'light' ? 'btn-success' : 'btn-outline-success'; ?>">Add new</a>
+            <div class="col-md-9">
+                <a href="<?= $path ?>index.php?page=posts&mode=add" class="btn <?= $themeMode == 'light' ? 'btn-success' : 'btn-outline-success'; ?>">Add new</a>
+            </div>
+            <div class="col-md-3 pull-right">
+                <form>
+                    <input type="hidden" name="page" value="posts">
+                    <input type="hidden" name="mode" value="search">
+                    <div class="form-group">
+                        <input type="text" name="searchInp" placeholder="Search..." value="<?= $_REQUEST['searchInp'] ?>" class="form-control">
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="row overflow-auto">
             <table class="table table-striped table-hover <?= $themeMode == 'light' ? '' : 'table-dark'; ?>">
@@ -178,7 +222,13 @@ if ($_REQUEST['mode'] == 'delete') {
                 <tbody>
 
                     <?php
-                    $query = "SELECT * FROM tbl_posts ORDER BY post_date DESC";
+                    if ($_REQUEST['mode'] == 'search') {
+                        $searchVal = $_GET['searchInp'];
+                        $query = "SELECT * FROM tbl_posts WHERE post_title LIKE '%" . $searchVal . "%' OR post_detail LIKE '%" . $searchVal . "%' ORDER BY post_date DESC";
+                        // echo $query;
+                    } else {
+                        $query = "SELECT * FROM tbl_posts ORDER BY post_date DESC";
+                    }
                     $exe = $conn->query($query);
                     $count = 0;
                     while ($post =  $exe->fetch_array()) {
