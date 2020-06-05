@@ -2,7 +2,7 @@
 
 $path = "http://localhost/zoomApp/";
 // Site Theme Mode
-
+// print_r($_SESSION);
 $themeMode = 'light';
 if (!isset($_SESSION['theme'])) {
     $_SESSION['theme'] = $themeMode;

@@ -1,5 +1,5 @@
 <header class="mb-3 shadow">
-    <nav class="navbar navbar-expand-lg <?= $themeMode == 'light' ? 'navbar-light bg-light' : 'navbar-dark bg-dark'; ?>">
+    <nav class="navbar navbar-expand-lg <?= $themeMode == 'light' ? 'navbar-light bg-light' : 'navbar-dark bg-dark';  ?>">
         <a class="navbar-brand" href="index.php"><img src="assets/new_logo.png" height="60px" width="150px" alt="Logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,14 +22,8 @@
             </ul>
             <ul class="navbar-nav float-right">
                 <li class="nav-item">
-                    <form action="" method="post">
-                        <button class="nav-link active" name="theme_btn" type="submit">
-                            <?php if ($themeMode == 'light') {
-                                echo 'Dark Mode';
-                            } else {
-                                echo 'Light Mode';
-                            } ?></button>
-                    </form>
+                    <button class="nav-link btn active" id="theme_btn" data-url="<?= $path . 'codes/switch-theme.php' ?>" name="theme_btn" type="submit"><?= $themeMode == 'light' ? 'Dark Mode' : 'Light Mode';  ?>
+                    </button>
                 </li>
                 <li class="nav-item">
                     <?php

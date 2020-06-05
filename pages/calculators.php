@@ -25,7 +25,7 @@ if (isset($_POST['tempBtn'])) {
     }
 }
 ?>
-<div class="col-md-3 col-xs-12 py-3 bg-light shadow <?= $themeMode == 'light' ? '' : 'bg-dark'; ?>">
+<div class="col-md-3 col-xs-12 py-3 bg-light shadow cal-list <?= $themeMode == 'light' ? '' : 'bg-dark'; ?>">
     <h3>My SideBar</h3>
     <div class="row">
         <div class="col-12">
