@@ -9,6 +9,7 @@ include('includes/init.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?= $path ?>assets/bootstrap.min.css">
     <link rel="stylesheet" href="<?= $path ?>assets/my_styles.css">
+    <link rel="stylesheet" href="<?= $path ?>assets/fontawesome/css/all.min.css">
 
     <link rel="stylesheet" href="<?= $path ?>assets/dark-sheet.css">
     <script src="<?= $path ?>assets/jquery.min.js"></script>

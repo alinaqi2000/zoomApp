@@ -196,7 +196,7 @@ if ($_REQUEST['mode'] == 'delete') {
     ?>
         <div class="row my-2">
             <div class="col-md-9">
-                <a href="<?= $path ?>index.php?page=posts&mode=add" class="btn <?= $themeMode == 'light' ? 'btn-success' : 'btn-outline-success'; ?>">Add new</a>
+                <a href="<?= $path ?>index.php?page=posts&mode=add" class="btn <?= $themeMode == 'light' ? 'btn-success' : 'btn-outline-success'; ?>"><i class="fa fa-plus"></i> Add new</a>
             </div>
             <div class="col-md-3 pull-right">
                 <form>
@@ -216,7 +216,7 @@ if ($_REQUEST['mode'] == 'delete') {
                         <th>Image</th>
                         <th>Title</th>
                         <th>Detail</th>
-                        <th width="8%">Actions</th>
+                        <th width="18%">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -254,8 +254,8 @@ if ($_REQUEST['mode'] == 'delete') {
                             <td><?= subString($post['post_detail'], 75) ?></td>
                             <td>
                                 <div class="btn-group">
-                                    <a class="btn <?= $themeMode == 'light' ? 'btn-warning' : 'btn-outline-warning'; ?>" href="<?= $path ?>index.php?page=posts&mode=edit&id=<?= $post['post_id'] ?>">Edit</a>
-                                    <a class="btn <?= $themeMode == 'light' ? 'btn-danger' : 'btn-outline-danger'; ?>" href="<?= $path ?>index.php?page=posts&mode=delete&id=<?= $post['post_id'] ?>">Delete</a>
+                                    <a class="btn <?= $themeMode == 'light' ? 'btn-warning' : 'btn-outline-warning'; ?>" href="<?= $path ?>index.php?page=posts&mode=edit&id=<?= $post['post_id'] ?>"><i class="fa fa-edit"></i> Edit</a>
+                                    <a class="btn <?= $themeMode == 'light' ? 'btn-danger' : 'btn-outline-danger'; ?>" href="<?= $path ?>index.php?page=posts&mode=delete&id=<?= $post['post_id'] ?>"><i class="fa fa-trash"></i> Delete</a>
                                 </div>
                             </td>
                         </tr>
