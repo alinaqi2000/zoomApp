@@ -75,8 +75,9 @@ if (isset($_POST['usr_entry'])) {
                             </tr>
                         </tbody>
                     </table>
+                    <a class="btn <?= $themeMode == 'light' ? 'btn-danger' : 'btn-outline-danger'; ?>" href="<?= $path ?>index.php?page=posts&mode=delete&id=<?= $post['post_id'] ?>"><i class="fa fa-trash"></i> Delete</a>
                     <div class="form-group">
-                        <a href="<?= $path ?>index.php?page=users_entry" class="btn <?= $themeMode == 'light' ? 'btn-secondary' : 'btn-outline-secondary'; ?>">Enter New User</a>
+                        <a href="<?= $path ?>index.php?page=users_entry"class="btn <?= $themeMode == 'light' ? 'btn-danger' : 'btn-outline-danger'; ?>">Enter New User</a>
                     </div>
 
                 </div>
