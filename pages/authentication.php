@@ -16,19 +16,7 @@
                 }
                 ?>
                 <?php
-                if (isset($_SESSION['signal'])) {
-                    if ($_SESSION['signal'] == 'bad') {
-                ?>
-                        <p class="alert w-100 alert-danger"><?php echo $_SESSION['msg'] ?></p>
-                    <?php
-                    } else {
-                    ?>
-                        <p class="alert w-100 alert-success"><?php echo $_SESSION['msg'] ?></p>
-                <?php
-                    }
-                    unset($_SESSION["signal"]);
-                    unset($_SESSION["msg"]);
-                }
+                showMessage('w-100');
                 ?>
                 <div class="box-body">
                     <form method="post">

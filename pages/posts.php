@@ -164,6 +164,35 @@ if ($_REQUEST['mode'] == 'delete') {
         <div class="row">
             <form action="" enctype="multipart/form-data" method="post" class="col-md-8 my-3">
                 <div class="form-group">
+                    <label for="">Test Input</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div id="suggestName" style="cursor: pointer;" class="input-group-text">Suggest me a name</div>
+                        </div>
+                        <input type="text" maxlength="10" class="inptst form-control" id="testInp" placeholder="Username">
+                        <p class="text-secondary w-100" id="inpLen"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="w-100">
+                        <button type="button" id="suggest" class="btn w-100 btn-info">
+                            Suggest
+                        </button>
+                    </div>
+                    <textarea id="toSuggest" cols="30" rows="10" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="">Test Input 2</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div id="startInterval" style="cursor: pointer;" class="input-group-text">Start Interval</div>
+                            <div id="stopInterval" style="cursor: pointer;" class="d-none input-group-text">Stop Interval</div>
+                        </div>
+                        <input type="text" class="form-control" id="testInp2" placeholder="Date">
+                        <p class="text-secondary w-100" id="inpLen2"></p>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="">Post Title</label>
                     <input type="text" name="title" value="<?= $title ?>" class="form-control">
                 </div>
@@ -191,6 +220,50 @@ if ($_REQUEST['mode'] == 'delete') {
                 </div>
             </form>
         </div>
+        <script>
+            $(document).ready(function() {
+                $('#suggest').click(function() {
+                    $('#toSuggest').html('Ali&nbsp;Naqi');
+                });
+                $('#suggestName').click(function() {
+                    $('#testInp').val("Ali Naqi");
+                });
+                $("#testInp").keyup(function() {
+                    if ($(this).val().length > 9) {
+                        $('#inpLen').addClass('text-danger');
+                        $('#inpLen').html('maximum charaters have been written');
+                    } else {
+                        $('#inpLen').removeClass('text-danger');
+                        $('#inpLen').html($(this).val().length + '/10 charaters have been written');
+                    }
+
+                });
+                var counter = 10;
+                var interval;
+                $('#startInterval').click(function() {
+                    $('#inpLen2').html('Counter is : ' + counter);
+                    interval = setInterval(() => {
+                        counter--;
+                        if (counter >= 0) {
+                            $('#inpLen2').html('Counter is : ' + counter);
+                        } else {
+                            counter = 10;
+                            clearInterval(interval);
+                        }
+
+                    }, 250);
+                    // $(this).addClass('d-none');
+                    // $('#stopInterval').removeClass('d-none');
+                });
+                // $('#stopInterval').click(function() {
+                //     counter = 10;
+                //     clearInterval(interval);
+                //     $(this).addClass('d-none');
+                //     $('#startInterval').removeClass('d-none');
+                // });
+
+            });
+        </script>
     <?php
     } else {
     ?>
