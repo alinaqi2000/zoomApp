@@ -2,6 +2,7 @@
 if (isset($_POST['login_btn'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $user_id = "";
     $msg = new message();
     if ($username != '' || $password != '') {
         $query = "SELECT * FROM tbl_users WHERE user_name='" . $username . "'";
@@ -9,11 +10,13 @@ if (isset($_POST['login_btn'])) {
         while ($user = $exe->fetch_array()) {
             $admin = $user['user_name'];
             $pass = $user['user_pass'];
+            $user_id = $user['user_id'];
         }
         if ($username == $admin) {
             if (md5($password) == $pass) {
                 $msg->signal = "ok";
                 $_SESSION['site_id'] = '1';
+                $_SESSION['site_user_id'] = $user_id;
                 $msg->msg = "Welcome! " . $admin . " to the site.";
             } else {
                 $msg->signal = "bad";

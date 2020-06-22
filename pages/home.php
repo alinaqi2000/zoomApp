@@ -2,6 +2,8 @@
 showMessage('float-left');
 $message = "Welcome To Home";
 ?>
-<h1><?php
+<h1>
+    <?php
     echo subString($message);
-    ?></h1>
+    ?>
+</h1>

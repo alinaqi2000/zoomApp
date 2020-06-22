@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    console.log('Hello World');
+    // console.log('Hello World');
     $('#theme_btn').click(function () {
         var urlGet = $(this).data('url');
 

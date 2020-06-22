@@ -1,9 +1,5 @@
 <?php
 if (isset($_POST['save_post'])) {
-    // echo $_FILES['image']["tmp_name"];
-    // print_r($_POST['detail']);
-    // print_r($_FILES['image']['name']);
-    // die();
     $title = mysqli_real_escape_string($conn, $_POST['title']);
     $detail = mysqli_real_escape_string($conn, $_POST['detail']);
     $image = $_FILES["image"]["name"];
@@ -163,7 +159,7 @@ if ($_REQUEST['mode'] == 'delete') {
     ?>
         <div class="row">
             <form action="" enctype="multipart/form-data" method="post" class="col-md-8 my-3">
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="">Test Input</label>
                     <div class="input-group mb-2">
                         <div class="input-group-prepend">
@@ -191,7 +187,7 @@ if ($_REQUEST['mode'] == 'delete') {
                         <input type="text" class="form-control" id="testInp2" placeholder="Date">
                         <p class="text-secondary w-100" id="inpLen2"></p>
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label for="">Post Title</label>
                     <input type="text" name="title" value="<?= $title ?>" class="form-control">
@@ -250,18 +246,8 @@ if ($_REQUEST['mode'] == 'delete') {
                             counter = 10;
                             clearInterval(interval);
                         }
-
                     }, 250);
-                    // $(this).addClass('d-none');
-                    // $('#stopInterval').removeClass('d-none');
                 });
-                // $('#stopInterval').click(function() {
-                //     counter = 10;
-                //     clearInterval(interval);
-                //     $(this).addClass('d-none');
-                //     $('#startInterval').removeClass('d-none');
-                // });
-
             });
         </script>
     <?php

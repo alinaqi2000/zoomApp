@@ -62,3 +62,15 @@ function sum($a, $b)
 {
     return $a + $b;
 }
+function getList($table, $where = "", $order = "", $limit = "")
+{
+    global $conn;
+    $result = [];
+    $query = "SELECT * FROM tbl_users " . $where . " " . $order . " " . $limit . "";
+    $exe = $conn->query($query);
+    while ($row = $exe->fetch_array()) {
+        array_push($result, $row);
+    }
+
+    return $result;
+}
