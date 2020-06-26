@@ -43,6 +43,7 @@ include('includes/init.php');
             background: #ddd;
             right: 28px;
             bottom: 70px;
+            height: 400px;
             z-index: 999;
         }
 
@@ -146,12 +147,17 @@ include('includes/init.php');
 
         .makeChat .chatHeader #delMsges {
             float: left;
-            padding: 9px 17px;
+            padding: 9px 8px;
+        }
+
+        .makeChat .chatHeader #refMsges {
+            float: left;
+            padding: 9px 8px;
         }
 
         .makeChat .chatHeader #editMsges {
             float: left;
-            padding: 9px 17px;
+            padding: 9px 17px 9px 8px;
         }
 
         .makeChat .chatHeader h4 {
@@ -172,7 +178,8 @@ include('includes/init.php');
 </head>
 
 <body class="<?= $themeMode == 'light' ? '' : 'bg-dark'; ?>">
-
+    <input type="hidden" id="siteUrl" value="<?= $path ?>">
+    <input type="hidden" id="siteAdmin" value="<?= $_SESSION['site_user_id'] ?>">
     <?php
 
     if ($page != 'authentication') {
@@ -196,28 +203,22 @@ include('includes/init.php');
         include('pages/shared/footer.php');
     }
     ?>
-    <div class="msgBox d-none col-md-3">
+    <div class="msgBox d-none col-md-4 col-lg-4 col-xl-3 col-sm-8 col-xs-12">
         <div class="w-100 float-left">
             <h3 class="float-left">Users List</h3>
             <button id="closeMsgBox" class="btn btn-danger float-right"><i class="fa fa-times"></i></button>
         </div>
-        <ul>
-            <?php
-            $getUsers = getList('tbl_users', "WHERE user_id!='" . $user_id . "'");
-            foreach ($getUsers as $user) {
-            ?>
-                <li class="makeMsg" data-id="<?= $user['user_id'] ?>"><?= $user['user_name'] ?></li>
-            <?php
-            }
-            ?>
+        <ul id="usersList">
+
 
         </ul>
     </div>
-    <div class="makeChat d-none col-md-3">
+    <div class="makeChat d-none col-md-4 col-lg-4 col-xl-3 col-sm-8 col-xs-12">
         <div class="chatHeader">
             <button type="button" class="btn" id="goBack"><i class="fa fa-arrow-left"></i></button>
-            <h4>Ali Naqi</h4>
+            <h4 id="recpName"></h4>
             <div class="float-right">
+                <button type="button" class="btn" id="refMsges"><i class="fa fa-sync-alt"></i></button>
                 <button type="button" class="btn d-none" id="delMsges"><i class="fa fa-trash"></i></button>
                 <button type="button" class="btn" id="editMsges"><i class="fa fa-edit"></i></button>
 
@@ -231,10 +232,11 @@ include('includes/init.php');
             <div class="chatInp">
                 <input type="text" id="msgContent" class="writeChat" placeholder="Type a message">
             </div>
-            <button type="button" class="btn" id="sendMsg"><i class="fa fa-paper-plane"></i></button>
+            <button type="button" data-url="<?= $path . "codes/sendChat.php" ?>" class="btn" id="sendMsg"><i class="fa fa-paper-plane"></i></button>
         </div>
     </div>
-    <button type="button" class="btn msgBtn  btn-warning" id="showMsgBox"><span class="btBadge"></span><i class="fa fa-envelope"></i></button>
+    <!-- <span class="btBadge"></span> <i class="fa fa-envelope"></i> -->
+    <button type="button" class="btn msgBtn  btn-warning" id="showMsgBox"></button>
     <!-- <div class="chatSingle">
         <p>Your mesasge to me</p>
     </div>
@@ -243,66 +245,51 @@ include('includes/init.php');
     </div> -->
     <script>
         $(document).ready(function() {
-            var chatsData = {
-                active_user: "2",
-                isTyping: "0",
-                data: [{
-                        m_id: "1",
-                        m_chat: "1",
-                        m_user: "1",
-                        m_recipient: "2",
-                        m_content: "My mesasge to you",
-                        m_date: "21 June, 20, 11:59 am",
-                    },
-                    {
-                        m_id: "2",
-                        m_chat: "1",
-                        m_user: "2",
-                        m_recipient: "1",
-                        m_content: "Your mesasge to me",
-                        m_date: "21 June, 20, 11:59 am",
-                    },
-                    {
-                        m_id: "3",
-                        m_chat: "1",
-                        m_user: "1",
-                        m_recipient: "2",
-                        m_content: "My mesasge to you",
-                        m_date: "21 June, 20, 11:59 am",
-                    },
-                    {
-                        m_id: "4",
-                        m_chat: "1",
-                        m_user: "2",
-                        m_recipient: "1",
-                        m_content: "Your mesasge to me",
-                        m_date: "21 June, 20, 11:59 am",
-                    },
-                    {
-                        m_id: "5",
-                        m_chat: "1",
-                        m_user: "1",
-                        m_recipient: "2",
-                        m_content: "My mesasge to you",
-                        m_date: "21 June, 20, 11:59 am",
-                    },
-                    {
-                        m_id: "6",
-                        m_chat: "1",
-                        m_user: "2",
-                        m_recipient: "1",
-                        m_content: "Your mesasge to me",
-                        m_date: "21 June, 20, 11:59 am",
-                    }
-                ]
-            };
 
-            makeMsgList();
+            var chatsData = [];
+            var chatIntvl;
+            var usrIntvl;
+            getBadge();
+
+            function getBadge() {
+                $.ajax({
+                    method: "GET",
+                    dataType: "JSON",
+                    url: $('#siteUrl').val() + 'codes/chat_badge.php?user=' + $('#siteAdmin').val(),
+                    success: function(resp) {
+                        if ((+resp) > 0) {
+                            $('#showMsgBox').html('<span class="btBadge"></span><i class="fa fa-envelope"></i>');
+                        } else {
+                            $('#showMsgBox').html('<i class="fa fa-envelope"></i>');
+
+                        }
+                    }
+                });
+            }
+
+            function getMsgList(getUrl) {
+                $.ajax({
+                    method: "GET",
+                    dataType: "JSON",
+                    url: getUrl,
+                    success: function(resp) {
+                        chatsData = resp;
+                        makeMsgList();
+                    },
+                    error: function() {
+
+                    }
+                });
+
+            }
 
             function makeMsgList() {
+                getBadge();
                 var msgList = "";
                 $('.msgCheckBox').addClass('d-none');
                 $('#delMsges').addClass('d-none');
+                $('#recpName').html(chatsData.recipient_name);
+
                 chatsData.data.forEach(
                     (m, index) => {
                         var hasClass = "";
@@ -314,7 +301,7 @@ include('includes/init.php');
                         msgList += '</div>';
                     }
                 );
-                if (chatsData.isTyping === 1) {
+                if (chatsData.isTyping === "1") {
                     msgList += '<div class="chatSingle">';
                     msgList += '<p>typing...</p>';
                     msgList += '</div>';
@@ -335,31 +322,54 @@ include('includes/init.php');
                     for (let i = 0; i < checkbox_value.length; i++) {
                         removeMsg(checkbox_value[i]);
                     }
-                    makeMsgList();
+                    getMsgList($('#siteUrl').val() + 'codes/getChat.php?user=' + chatsData.active_user + '&recipient=' + chatsData.recipient_id);
+
                 }
 
             });
 
             function removeMsg(id) {
-                var index = $('#box_' + id).data('index');
-                chatsData.data.splice(index, 1);
+                $.ajax({
+                    method: "GET",
+                    dataType: "JSON",
+                    url: $('#siteUrl').val() + 'codes/delChat.php?msg_id=' + id
+                });
             }
             $('#sendMsg').click(function() {
                 var msgValue = $('#msgContent').val();
+
+                $.ajax({
+                    method: "POST",
+                    dataType: "JSON",
+                    url: $(this).data('url'),
+                    data: {
+                        content: msgValue,
+                        user: chatsData.active_user,
+                        recipient: chatsData.recipient_id,
+                        chat_id: chatsData.chat_id
+                    },
+                    success: function() {
+                        getMsgList($('#siteUrl').val() + 'codes/getChat.php?user=' + chatsData.active_user + '&recipient=' + chatsData.recipient_id);
+                    },
+                    error: function() {}
+                });
+
                 if (msgValue !== '') {
                     var newMsgObj = {
                         m_id: chatsData.data.length + 1,
-                        m_chat: "1",
+                        m_chat: chatsData.chat_id,
                         m_user: chatsData.active_user,
-                        m_recipient: "2",
+                        m_recipient: chatsData.recipient_id,
                         m_content: msgValue,
-                        m_date: "21 June, 20, 11:59 am",
+                        m_date: new Date(),
                     };
                     chatsData.isTyping = 0;
                     $('#msgContent').val('');
                     chatsData.data.push(newMsgObj);
-                    makeMsgList();
                 }
+            });
+            $('#refMsges').click(function() {
+                getMsgList($('#siteUrl').val() + 'codes/getChat.php?user=' + chatsData.active_user + '&recipient=' + chatsData.recipient_id);
             });
             $('#editMsges').click(function() {
                 $('.msgCheckBox').toggleClass('d-none');
@@ -367,31 +377,72 @@ include('includes/init.php');
             });
             $('#msgContent').keyup(function() {
                 var msgValue = $(this).val();
-                if (msgValue !== '') {
-                    chatsData.isTyping = 1;
-                    makeMsgList();
+
+                if (msgValue.length !== "") {
+                    $.ajax({
+                        method: "GET",
+                        dataType: "JSON",
+                        url: $('#siteUrl').val() + 'codes/chat_istyping.php?user=' + chatsData.active_user + '&recipient=' + chatsData.recipient_id + '&value=1'
+                    });
                 } else {
-                    chatsData.isTyping = 0;
-                    makeMsgList();
+                    $.ajax({
+                        method: "GET",
+                        dataType: "JSON",
+                        url: $('#siteUrl').val() + 'codes/chat_istyping.php?user=' + chatsData.active_user + '&recipient=' + chatsData.recipient_id + '&value=0'
+                    });
                 }
+
+
+                // if (msgValue !== '') {
+                //     chatsData.isTyping = 1;
+                //     // makeMsgList();
+                // } else {
+                //     chatsData.isTyping = 0;
+                //     // makeMsgList();
+                // }
             });
             $('#showMsgBox').click(function() {
+                getAdmins();
+                usrIntvl = setInterval(() => {
+                    getAdmins();
+                }, 1000);
                 $('.msgBox').toggleClass('d-none');
                 $(this).toggleClass('d-none');
             });
             $('#closeMsgBox').click(function() {
+                // clearInterval(usrIntvl);
                 $('#showMsgBox').toggleClass('d-none');
                 $('.msgBox').toggleClass('d-none');
             });
             $('#goBack').click(function() {
+                // getAdmins();
+                usrIntvl = setInterval(() => {
+                    getAdmins();
+                }, 1000);
+                // clearInterval(chatIntvl);
                 $('#showMsgBox').toggleClass('d-none');
                 $('.makeChat').toggleClass('d-none');
             });
-            $('.makeMsg').click(function() {
+            $(document.body).on("click", '.makeMsg', function() {
                 $('#showMsgBox').toggleClass('d-none');
                 $('.makeChat').toggleClass('d-none');
+                getMsgList($(this).data('url'));
+                // chatIntvl = setInterval(() => {
+                //     getMsgList($(this).data('url'));
+                // }, 1000);
+                clearInterval(usrIntvl);
             });
 
+            function getAdmins() {
+                $.ajax({
+                    method: "GET",
+                    dataType: "JSON",
+                    url: $('#siteUrl').val() + 'codes/get_chat_users.php?user_id=' + $('#siteAdmin').val(),
+                    success: function(resp) {
+                        $('#usersList').html(resp);
+                    }
+                });
+            }
         });
     </script>
 

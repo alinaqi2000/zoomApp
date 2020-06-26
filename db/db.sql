@@ -1,3 +1,36 @@
+--------------------------------------------------------
+
+--
+-- Table structure for table `tbl_chat`
+--
+
+DROP TABLE IF EXISTS `tbl_chat`;
+CREATE TABLE `tbl_chat` (
+  `chat_id` int(11) NOT NULL,
+  `chat_user` int(11) NOT NULL,
+  `chat_recipient` int(11) NOT NULL,
+  `chat_read` int(11) NOT NULL DEFAULT '1',
+  `chat_typing` int(11) NOT NULL DEFAULT '0',
+  `chat_date` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_messages`
+--
+
+DROP TABLE IF EXISTS `tbl_messages`;
+CREATE TABLE `tbl_messages` (
+  `m_id` int(11) NOT NULL,
+  `m_maker` int(11) NOT NULL,
+  `m_chat` int(11) NOT NULL,
+  `m_user` int(11) NOT NULL,
+  `m_recipient` int(11) NOT NULL,
+  `m_content` text NOT NULL,
+  `m_date` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 -- --------------------------------------------------------
 
 --
@@ -12,6 +45,14 @@ CREATE TABLE `tbl_posts` (
   `post_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `post_image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_posts`
+--
+
+INSERT INTO `tbl_posts` (`post_id`, `post_title`, `post_detail`, `post_date`, `post_image`) VALUES
+(3, 'a Blog', 'adsads', '2020-06-05 05:35:05', 'image_15913353059532.png'),
+(5, 'Ger', 'asdasdasd', '2020-06-12 08:06:13', 'image_15913355619716.png');
 
 -- --------------------------------------------------------
 
@@ -58,11 +99,24 @@ CREATE TABLE `tbl_users` (
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `user_pass`, `user_date`) VALUES
 (6, 'admin', '21232f297a57a5a743894a0e4a801fc3', '2020-04-25 17:33:00'),
-(7, 'alinaqi2000', '21232f297a57a5a743894a0e4a801fc3', '2020-04-25 17:33:41');
+(8, 'Ali Naqi', '47bce5c74f589f4867dbd57e9ca9f808', '2020-06-19 07:08:11');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tbl_chat`
+--
+ALTER TABLE `tbl_chat`
+  ADD PRIMARY KEY (`chat_id`),
+  ADD KEY `User Recipient` (`chat_user`);
+
+--
+-- Indexes for table `tbl_messages`
+--
+ALTER TABLE `tbl_messages`
+  ADD PRIMARY KEY (`m_id`);
 
 --
 -- Indexes for table `tbl_posts`
@@ -87,10 +141,22 @@ ALTER TABLE `tbl_users`
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_chat`
+--
+ALTER TABLE `tbl_chat`
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `tbl_messages`
+--
+ALTER TABLE `tbl_messages`
+  MODIFY `m_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+
+--
 -- AUTO_INCREMENT for table `tbl_posts`
 --
 ALTER TABLE `tbl_posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_students`
@@ -102,5 +168,16 @@ ALTER TABLE `tbl_students`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tbl_chat`
+--
+ALTER TABLE `tbl_chat`
+  ADD CONSTRAINT `User Recipient` FOREIGN KEY (`chat_user`) REFERENCES `tbl_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Users` FOREIGN KEY (`chat_user`) REFERENCES `tbl_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
